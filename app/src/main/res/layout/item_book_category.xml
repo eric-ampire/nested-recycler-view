@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="org.ericampire.android.myapplication.entity.Book" />
+        <variable
+            name="bookListener"
+            type="org.ericampire.android.myapplication.adapter.common.ItemClickListener&lt;Book>" />
         <variable
             name="bookCategory"
             type="org.ericampire.android.myapplication.entity.BookCategory" />
@@ -36,6 +40,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            app:setBookListener="@{bookListener}"
             app:setBooks="@{bookCategory.books}"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

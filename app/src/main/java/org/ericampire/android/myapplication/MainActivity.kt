@@ -1,9 +1,11 @@
 package org.ericampire.android.myapplication
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.ericampire.android.myapplication.adapter.BookCategoryAdapter
+import org.ericampire.android.myapplication.adapter.common.ItemClickListener
 import org.ericampire.android.myapplication.entity.Book
 import org.ericampire.android.myapplication.entity.BookCategory
 
@@ -13,7 +15,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val bookCategoryAdapter = BookCategoryAdapter()
+        val bookCategoryAdapter = BookCategoryAdapter(object : ItemClickListener<Book> {
+            override fun onClickListener(item: Book) {
+                Toast.makeText(baseContext, "You click ${item.title}", Toast.LENGTH_LONG).show()
+            }
+        })
+
         bookCategoryAdapter.submitList(getData())
         outerRecyclerView.adapter = bookCategoryAdapter
     }

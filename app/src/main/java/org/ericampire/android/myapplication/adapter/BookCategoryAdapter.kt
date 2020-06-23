@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.ericampire.android.myapplication.adapter.common.CustomViewHolder
+import org.ericampire.android.myapplication.adapter.common.ItemClickListener
 import org.ericampire.android.myapplication.databinding.ItemBookCategoryBinding
 import org.ericampire.android.myapplication.entity.*
 
-class BookCategoryAdapter : ListAdapter<BookCategory, CustomViewHolder>(Companion) {
+class BookCategoryAdapter(private val listener: ItemClickListener<Book>) : ListAdapter<BookCategory, CustomViewHolder>(Companion) {
     private val viewPool = RecyclerView.RecycledViewPool()
 
     companion object : DiffUtil.ItemCallback<BookCategory>() {
@@ -33,6 +34,7 @@ class BookCategoryAdapter : ListAdapter<BookCategory, CustomViewHolder>(Companio
         val currentBookCategory = getItem(position)
         val itemBinding = holder.binding as ItemBookCategoryBinding
 
+        itemBinding.bookListener = listener
         itemBinding.bookCategory = currentBookCategory
         itemBinding.nestedRecyclerView.setRecycledViewPool(viewPool)
         itemBinding.executePendingBindings()

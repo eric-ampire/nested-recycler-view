@@ -5,10 +5,10 @@ import androidx.recyclerview.widget.RecyclerView
 import org.ericampire.android.myapplication.adapter.BookAdapter
 import org.ericampire.android.myapplication.entity.Book
 
-@BindingAdapter(value = ["setBooks"])
-fun RecyclerView.setRowBook(books: List<Book>?) {
-    if (books != null) {
-        val bookAdapter = BookAdapter()
+@BindingAdapter(value = ["setBooks", "setBookListener"])
+fun RecyclerView.setRowBook(books: List<Book>?, listener: ItemClickListener<Book>?) {
+    if (books != null && listener != null) {
+        val bookAdapter = BookAdapter(listener)
         bookAdapter.submitList(books)
 
         adapter = bookAdapter
